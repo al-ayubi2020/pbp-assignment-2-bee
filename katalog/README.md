@@ -25,4 +25,4 @@ dalam routing, kita harus mendefinisikan sebuah route baru dalam file urls.py ya
 pada saat routing, fungsi show_catalog mengirim data context kepada katalog.html. context merupakan data bertipe dictionary, jadi kita dapat memanggil key dari setiap value jika ingin menampilkan value tersebut kedalam file katalog.html. untuk value bertipe array kita dapat melakukan unboxing dengan melakukan loop.
 
 ## Implementasi Deployment ke Heroku
-Buat aplikasi baru pada heroku, 
+Buat aplikasi baru pada heroku, lalu tambahkan beberapa Action Secret pada repository ini berupa HEROKU_API_KEY dan HEROKU_APP_NAME. lalu pastikan workflow berjalan dan aplikasi terdeploy ke Heroku
