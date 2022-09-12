@@ -15,3 +15,14 @@ Hampir semua orang di komunitas pengguna python, menyarankan untuk menggunakan v
 Jawabannya adalah bisa. Namun, membuat sebuah projek python tanpa virtual env memiliki resiko tersendiri. Yaitu, seiring berjalannya waktu, potensi munculnya konflik dependency semakin besar. Seperti yang kita tahu, jika tidak menggunakan virtual env, maka pip akan menempatkan semua paket eksternal yang kita instal di folder bernama site-packages/ di instalasi Python dasar kita. Meskipun demikian, mengembangkan projek django tanpa virtual environment sangat dimungkinkan, namun dengan risikonya sendiri.
 
 
+## Implementasi views.py
+Pertama, harus import database models dengan nama class CatalogItem dahulu dari models.py dari directory file yang sama, dengan demikian saya dapat berinteraksi dengan DB. Lalu, CatalogItem dapat mengambil data dari DB lalu disimpan pada sebuah variable bernama data_catalog. Setelah itu, membuat sebuah data bertipe directory yang bernama context dan berisi data_catalog tersebut dan beberapa data tambahan lainnya. Terakhir, buat sebuah fungsi bernama show_katalog dengan parameter request. Fungsi tersebut akan mereturn fungsi render dengan berisi parameter request, nama template ("katalog.html"), dan data dari DB yang telah kita masukan kedalam variable context. Fungsi show_katalog ini akan diimport dan dipanggil pada saat proses routing sesuai routes yang telah ditentukan yaitu "/katalog".
+
+## Implementasi Routing
+dalam routing, kita harus mendefinisikan sebuah route baru dalam file urls.py yang ada pada folder project_django dengan mengimport pula urls.py yang ada pada folder katalog. Pada proses routing ini, file urls.py pada folder katalog akan menginvoke fungsi show_catalog dan akhirnya akan merender data yang ada dalam context ke dalam katalog.html
+
+## Implementasi Pemetaan Data Django ke Dalam Template HTML
+pada saat routing, fungsi show_catalog mengirim data context kepada katalog.html. context merupakan data bertipe dictionary, jadi kita dapat memanggil key dari setiap value jika ingin menampilkan value tersebut kedalam file katalog.html. untuk value bertipe array kita dapat melakukan unboxing dengan melakukan loop.
+
+## Implementasi Deployment ke Heroku
+Buat aplikasi baru pada heroku, 
