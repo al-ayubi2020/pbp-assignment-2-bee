@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}
+{% block content %}
 
 <h1>Assignment 3 PBP/PBD</h1>
 
@@ -16,7 +16,6 @@
     <th>Release Date</th>
     <th>Review</th>
   </tr>
-  <!-- prettier-ignore -->
   {% for mywatchlist in data_mywatchlist %}
   <tr>
     <th>{{mywatchlist.watched}}</th>
