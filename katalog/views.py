@@ -1,6 +1,4 @@
 from django.shortcuts import render
-
-# TODO: Create your views here.
 from katalog.models import CatalogItem
 
 def show_catalog(request):
