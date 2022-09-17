@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from katalog.models import CatalogItem
+from django.template import loader
+from django.http import HttpResponse
 
 def show_catalog(request):
     return render(request, "katalog.html", context)

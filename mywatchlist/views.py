@@ -4,9 +4,9 @@ from django.http import HttpResponse
 from django.core import serializers
 
 def show_home(request):
-    return render(request, "home.html")
+    return render(request, "home.html", context)
 
-def show_mywatchlist(request):
+def show_mywatchlist_html(request):
     return render(request, "mywatchlist.html", context)
 
 def show_mywatchlist_xml(request):
