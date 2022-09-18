@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.core import serializers
 
 def show_home(request):
-    return render(request, "home.html", context)
+    return render(request, "home.html", message_context)
 
 def show_mywatchlist_html(request):
     return render(request, "mywatchlist.html", context)
@@ -31,10 +31,13 @@ if (watched > not_watched):
 else:
     message = "Wah, kamu masih sedikit menonton!"
 
+message_context = {
+    'message': message
+}
+
 data_mywatchlist = MyWatchListItem.objects.all()
 context = {
     'data_mywatchlist': data_mywatchlist,
     'name': 'Muhammad Hilman Al Ayubi',
     'npm': '2106706653',
-    'message': message,
 }
