@@ -23,10 +23,18 @@ def show_mywatchlist_json_by_id(request, id):
     data_mywatchlist_by_id = MyWatchListItem.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data_mywatchlist_by_id), content_type="application/json")
 
+watched = MyWatchListItem.objects.filter(watched=True).count()
+not_watched = MyWatchListItem.objects.filter(watched=False).count()
+message = ''
+if (watched > not_watched):
+    message = "Selamat, kamu sudah banyak menonton!"
+else:
+    message = "Wah, kamu masih sedikit menonton!"
 
 data_mywatchlist = MyWatchListItem.objects.all()
 context = {
     'data_mywatchlist': data_mywatchlist,
     'name': 'Muhammad Hilman Al Ayubi',
-    'npm': '2106706653'
+    'npm': '2106706653',
+    'message': message,
 }
