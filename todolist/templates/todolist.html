@@ -1,0 +1,27 @@
+{% block meta %}
+<title>To Do List</title>
+{% endblock meta %}
+
+{% block content %}
+<h5>username:</h5>
+<b>{{username}}</b>
+
+<table border="1">
+  <tr>
+    <th>Tanggal</th>
+    <th>Judul</th>
+    <th>Deskripsi</th>
+    <th>Dikerjakan</th>
+  </tr>
+  {% for todo in data %}
+  <tr>
+    <th>{{todo.date}}</th>
+    <th>{{todo.title}}</th>
+    <th>{{todo.description}}</th>
+    <th>{{todo.is_finished}}</th>
+  </tr>
+  {% endfor %}
+</table>
+<button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+
+{% endblock content %}

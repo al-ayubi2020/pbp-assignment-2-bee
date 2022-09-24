@@ -1,0 +1,112 @@
+[
+  {
+    "model": "mywatchlist.MyWatchListItem",
+    "pk": 1,
+    "fields": {
+      "watched": false,
+      "title": "MORBIUS",
+      "rating": 1,
+      "release_date": "2022-04-01",
+      "review": "Face tat albino to CGI spooky face this is one of the worst superhero films ever made. I just watched Morbius and I know next to nothing about him, what kind of doctor is he again? What does he enjoy? Is there some kind of romance between him & his lady doctor? I cannot tell you and who is Milo? Dr Who's character in this story is \"best friend who is also disabled\" and other than that there is no other characterization. I am stuck thinking \"why?\" Why is this movie?"
+    }
+  },
+  {
+    "model": "mywatchlist.MyWatchListItem",
+    "pk": 2,
+    "fields": {
+      "watched": false,
+      "title": "THOR: LOVE AND THUNDER",
+      "rating": 3,
+      "release_date": "2022-07-08",
+      "review": "For a movie seemingly made with the sole purpose of inserting as many goofy gags per minute as possible while employing a healthy dose of vivid colors and rousing GNR hits, Love and Thunder is shockingly lethargic."
+    }
+  },
+  {
+    "model": "mywatchlist.MyWatchListItem",
+    "pk": 3,
+    "fields": {
+      "watched": false,
+      "title": "THE BATMAN",
+      "rating": 4,
+      "release_date": "2022-03-04",
+      "review": "What this film does achieve, however, is telling a solid new Batman story, one with some pretty compelling twists and a strong point-of-view on who, exactly, the Caped Crusader is. By default, that makes it one of the better Batman movies ever made."
+    }
+  },
+  {
+    "model": "mywatchlist.MyWatchListItem",
+    "pk": 4,
+    "fields": {
+      "watched": true,
+      "title": "DOCTOR STRANGE IN THE MULTIVERSE OF MADNESS",
+      "rating": 4,
+      "release_date": "2022-06-22",
+      "review": "Doctor Strange in the Multiverse of Madness is one of the strongest MCU entry. Sam Raimi’s patented imprint was felt across the film. Elizabeth Olsen stole the show and will continue to be a fan-favorite."
+    }
+  },
+  {
+    "model": "mywatchlist.MyWatchListItem",
+    "pk": 5,
+    "fields": {
+      "watched": false,
+      "title": "THE LORD OF THE RINGS: THE FELLOWSHIP OF THE RING",
+      "rating": 5,
+      "release_date": "2002-08-06",
+      "review": "The New Zealander director Peter Jackson, who wrote the screenplay with Fran Walsh and Philippa Boyens, works with enough dramatic tension and pictorial grandeur to sustain us through long periods of complicated exposition and heavy bouts of swordplay."
+    }
+  },
+  {
+    "model": "mywatchlist.MyWatchListItem",
+    "pk": 6,
+    "fields": {
+      "watched": false,
+      "title": "TENET",
+      "rating": 3,
+      "release_date": "2020-09-03",
+      "review": "Nolan prioritizes the dense audiovisual spectacle of his most narratively complex films. Beyond the intellectual, they exist primarily, and more accessibly, as experiences. Put another way: Tenet is a vibe."
+    }
+  },
+  {
+    "model": "mywatchlist.MyWatchListItem",
+    "pk": 7,
+    "fields": {
+      "watched": false,
+      "title": "GET OUT",
+      "rating": 5,
+      "release_date": "2017-05-23",
+      "review": "Get Out is perhaps the best terror tale since the mid-2000s served up The Descent and Pan's Labyrinth, two masterworks that, like this one, have much more on tap than just creeping out audiences."
+    }
+  },
+  {
+    "model": "mywatchlist.MyWatchListItem",
+    "pk": 8,
+    "fields": {
+      "watched": true,
+      "title": "AVATAR",
+      "rating": 4,
+      "release_date": "2010-04-22",
+      "review": "Functioning as both an action-packed war movie and an allegory for our own beleaguered planet, Avatar smashes big set pieces together with big emotion to rousing effect."
+    }
+  },
+  {
+    "model": "mywatchlist.MyWatchListItem",
+    "pk": 9,
+    "fields": {
+      "watched": true,
+      "title": "INTERSTELLAR",
+      "rating": 3,
+      "release_date": "2014-11-07",
+      "review": "With all the rampant think pieces questioning the probability of every science fiction film that comes out, it's comforting to across a movie that doesn't really claim to have any of the answers."
+    }
+  },
+  {
+    "model": "mywatchlist.MyWatchListItem",
+    "pk": 10,
+    "fields": {
+      "watched": false,
+      "title": "MIDSOMMAR",
+      "rating": 4,
+      "release_date": "2019-08-30",
+      "review": "Indeed, it's cultural sensitivity that lies at the heart of this movie. It is not about serial killers, aliens or supernatural beings. It is about the ordinary humans we know as the Other because they come from somewhere else."
+    }
+  }
+]
