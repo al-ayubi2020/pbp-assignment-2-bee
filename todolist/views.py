@@ -20,7 +20,8 @@ def show_todolist(request):
     toDoListData = ToDoListModel.objects.filter(user=user)
     context = {
         'data' : toDoListData,
-        'username' : username
+        'username' : username,
+        'user': user.pk
     }
     return render(request, "todolist.html", context)
 

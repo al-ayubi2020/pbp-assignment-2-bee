@@ -1,11 +1,12 @@
 from django.db import models
 from datetime import datetime
 from django.conf import settings
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 class ToDoListModel(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.now)
     title = models.TextField()
     description = models.TextField()
