@@ -10,7 +10,7 @@
     <th>Tanggal</th>
     <th>Judul</th>
     <th>Deskripsi</th>
-    <th>Dikerjakan</th>
+    <th>Status</th>
     <th>Aksi</th>
   </tr>
   {% for todo in data %}
@@ -18,7 +18,13 @@
     <th>{{todo.date}}</th>
     <th>{{todo.title}}</th>
     <th>{{todo.description}}</th>
-    <th>{{todo.is_finished}}</th>
+    <th>
+        {% if todo.is_finished == False %}
+          Belum Selesai
+        {% else %}
+          Selesai
+        {% endif %}
+    </th>
     <th><button><a href="delete/{{todo.pk}}">Hapus</a></button><button><a href="done/{{todo.pk}}">Selesai</a></button></th>
   </tr>
   {% endfor %}

@@ -84,6 +84,7 @@ def doneTask(request, id):
     TaskData.save()
     return HttpResponseRedirect(reverse("todolist:show_todolist")) 
 
+@login_required(login_url='/todolist/login/')
 def deleteTask(request, id):
     username = request.COOKIES['username']
     user = User.objects.get(username=username)
