@@ -3,8 +3,7 @@
 {% endblock meta %}
 
 {% block content %}
-<h5>username:</h5>
-<b>{{username}}</b>
+<b>username: {{username}}</b>
 
 <table border="1">
   <tr>
@@ -12,6 +11,7 @@
     <th>Judul</th>
     <th>Deskripsi</th>
     <th>Dikerjakan</th>
+    <th>Aksi</th>
   </tr>
   {% for todo in data %}
   <tr>
@@ -19,10 +19,11 @@
     <th>{{todo.title}}</th>
     <th>{{todo.description}}</th>
     <th>{{todo.is_finished}}</th>
+    <th><button><a href="delete/{{todo.pk}}">Hapus</a></button><button><a href="done/{{todo.pk}}">Selesai</a></button></th>
   </tr>
   {% endfor %}
 </table>
+<button><a href="{% url 'todolist:create' %}">Tambah Task Baru</a></button>
 <button><a href="{% url 'todolist:logout' %}">Logout</a></button>
-{{data}}
-{{user}}
+
 {% endblock content %}

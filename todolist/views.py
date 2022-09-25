@@ -8,16 +8,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import datetime
 
+# from todolist.forms import CreateForm
+
 from django.contrib.auth.models import User
 
-from todolist.models import ToDoListModel
+from todolist.models import Task
 # Create your views here.
 
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
     username = request.COOKIES['username']
     user = User.objects.get(username=username)
-    toDoListData = ToDoListModel.objects.filter(user=user)
+    toDoListData = Task.objects.filter(user=user)
     context = {
         'data' : toDoListData,
         'username' : username,
@@ -58,3 +60,33 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('todolist:login'))
     response.delete_cookie('username')
     return response
+
+@login_required(login_url='/todolist/login/')
+def create(request):
+    if request.method == 'POST':
+        username = request.COOKIES['username']
+        user = User.objects.get(username=username)
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        item = Task(user=user, title=title, description=description)
+        item.save()
+        return HttpResponseRedirect(reverse("todolist:show_todolist")) 
+        
+    context = {}
+    return render(request, "create.html", context)
+
+@login_required(login_url='/todolist/login/')
+def doneTask(request, id):
+    username = request.COOKIES['username']
+    user = User.objects.get(username=username)
+    TaskData = Task.objects.filter(user=user).get(pk=id)
+    TaskData.is_finished = True
+    TaskData.save()
+    return HttpResponseRedirect(reverse("todolist:show_todolist")) 
+
+def deleteTask(request, id):
+    username = request.COOKIES['username']
+    user = User.objects.get(username=username)
+    TaskData = Task.objects.filter(user=user).get(pk=id)
+    TaskData.delete()
+    return HttpResponseRedirect(reverse("todolist:show_todolist")) 
