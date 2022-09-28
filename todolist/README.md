@@ -4,12 +4,12 @@
 
 [LINK](https://pbp-assignment-2-bee.herokuapp.com/todolist) atau https://pbp-assignment-2-bee.herokuapp.com/todolist
 
-dummy account
-username : pbp_user_1
-password : pbp_user_1_password
-
-username : pbp_user_2
-password : pbp_user_2_password
+dummy account <br>
+username : pbp_user_1 <br>
+password : pbp_user_1_password <br>
+<br>
+username : pbp_user_2 <br>
+password : pbp_user_2_password <br>
 
 ## Kegunaan CSRF Token
 
