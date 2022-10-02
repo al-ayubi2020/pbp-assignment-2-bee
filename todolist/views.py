@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 import datetime
 
 # from todolist.forms import CreateForm
@@ -28,16 +29,27 @@ def show_todolist(request):
     return render(request, "todolist.html", context)
 
 def register(request):
-    form = UserCreationForm()
-
     if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Akun telah berhasil dibuat!')
-            return redirect('todolist:login')
+        if username and password:
+            try:
+                acc = User.objects.create(username=username)
+                if acc:
+                    acc.set_password(password)
+                    acc.save()
+                    messages.success(request, 'Akun telah berhasil dibuat!')
+                    return redirect('todolist:login')
+                else:
+                    messages.success(request, 'Terjadi masalah!')
+            except:
+                messages.success(request, 'Username sudah pernah digunakan!')
+        else:
+            messages.success(request, 'Tidak boleh kosong!')
+
     
-    context = {'form':form}
+    context = {}
     return render(request, 'register.html', context)
 
 def login_user(request):
