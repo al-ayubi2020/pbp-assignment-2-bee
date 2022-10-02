@@ -1,6 +1,6 @@
 # todolist
 
-## assignment 4
+# assignment 4
 
 [LINK](https://pbp-assignment-2-bee.herokuapp.com/todolist) atau https://pbp-assignment-2-bee.herokuapp.com/todolist
 
@@ -51,3 +51,82 @@ user akan melakukan penambahan data menggunakan form. Setelah form tersebut sele
 - Buat model sesuai spesifikasi field.
 - Untuk implementasi login dan logout, buat fungsi tersebut pada `todolist/views.py` lalu proteksi autentikasi pada beberapa fungsi dengan menambahkan `@login_required(login_url='/todolist/login/')`.
 - Tambahkan tombol untuk dapat menuju halaman buat task. Lalu, buat fungsi untuk menambahkan task pada `todolist/views.py`.
+
+# Assignment 5
+
+## Perbedaan dari Inline, Internal, dan External CSS
+
+1. Internal CSS
+   Kode CSS internal diletakkan di dalam bagian head pada halaman. Class dan ID bisa digunakan untuk merujuk pada kode CSS, namun hanya akan aktif pada halaman tersebut. CSS internal diletakkan di dalam tag style. <br>
+   Manfaat internal CSS:
+
+   - Perubahan hanya terjadi pada 1 halaman
+   - Class dan ID bisa digunakan oleh internal stylesheet
+   - Tidak perlu meng-upload beberapa file karena HTML dan CSS bisa digunakan di file yang sama.
+     Kekurangan internal CSS:
+   - Meningkatkan waktu akses website
+   - Perubahan hanya terjadi pada 1 halaman – tidak efisien bila Anda ingin menggunakan CSS yang sama pada beberapa file.
+
+2. External CSS
+   Salah satu cara yang paling nyaman untuk menambahkan CSS. Dengan cara tersebut, perubahan apapun yang Anda buat pada file CSS akan tampil pada website Anda secara keseluruhan. Caranya dengan menghubungkan file CSS ke HTML malalui tag link. <br>
+   Manfaat External CSS:
+
+   - Ukuran file HTML menjadi lebih kecil dan strukturnya lebih rapi
+   - Kecepatan loading menjadi lebih cepat
+   - File CSS yang sama bisa digunakan di banyak halaman.
+     Kekurangan External CSS:
+   - Halaman belum tampil secara sempurna hingga file CSS selesai dipanggil.
+
+3. Inline CSS
+   Inline CSS digunakan untuk tag HTML tertentu. Atribut style digunakan untuk memberikan style ke tag HTML tertentu. <br>
+   Manfaat Inline CSS:
+   - Berguna jika Anda ingin menguji dan melihat perubahan
+   - Berguna untuk perbaikan cepat
+   - Permintaan HTTP yang lebih kecil
+     Kekurangan inline CSS:
+   - Inline CSS harus diterapkan pada setiap elemen
+
+## Tag HTML5 yang diketahui.
+
+1. Tag `<html>...</html>`
+   Tag `<HTML>` tugasnya adalah sebagai root, maksudnya semua tag yang berada didalam tag `<HTML>` merupakan gambaran dari dokumen HTML.
+2. Tag `<head>...</head>`
+   Tag `<HEAD>` tugasnya adalah memberikan informasi tentang dokumen, maksudnya didalam tag `<head>` kita bisa menambahkan tag- tag yang biasanya digunakan untuk memberikan informasi berupa penulis, judul dokumen, kata kunci pada dokumen dan masih banyak lagi informasi yang bisa di tambahkan pada tag ini.
+3. Tag `<title>...</title>`
+   Tag `<TITLE>` tugasnya adalah memberikan informasi berupa judul dokumen HTML.
+4. Tag `<body>...</body>`
+   Tag `<BODY>` tugasnya adalah memberikan isi dari suatu dokumen yang akan ditampilkan oleh web browsernya.
+5. Tag `<p>...</p>`
+   Tag `<P>` tugasnya adalah untuk membuat sebuah paragraf.
+6. Tag `<!-- komentar -->`
+   Tag `<!-- komentar -->` tugasnya adalah memberikan komentar pada sebuah dokumen HTML, namun tulisan yang dimasukan dalam tag ini tidak akan terlihat pada Web browser saat dijalankan tetapi dapat dilihat pada source program.
+7. Tag `<header>...</header>`
+   Tag `<HEADER>` merupakan bagian kepala dari dukumen.
+8. Tag `<footer>...</footer>`
+   Tag `<FOOTER>` merupakan bagian catatan kaki yang dapat berisi informasi tentang penulis, informasi hak cipta, dll
+9. Tag `<nav>...</nav>`
+   Tag `<NAV>` merupakan bagian dari dokumen yang dimaksudkan untuk memudahkan dalam proses navigasi.
+
+## CSS selector
+
+1. Selektor Tag
+   Selektor Tag disbut juga Type Selector. Selektor ini akan memilih elemen berdasarkan nama tag.
+2. Selektor Class
+   Selektor class adalah selektor yang memilih elemen berdasarkan nama class yang diberikan. Selektor class dibuat dengan tanda titik di depannya.
+3. Selektor ID
+   Selektor ID hampir sama dengan class. Bedanya, ID bersifat unik. Hanya boleh digunakan oleh satu elemen saja. Selektor ID ditandai dengan tanda pagar (#) di depannya.
+4. Selektor Atribut
+   Selektor atribut adalah selektor yang memilik elemen berdasarkan atribut. Selektor ini hampir sama seperti selektor Tag.
+5. Selektor Universal
+   Selektor universal adalah selektor yang digunakan untuk menyeleksi semua elemen pada jangkaua (scope) tertentu.
+6. Pseudo Selektor
+   Pseudo selektor adalah selektor untuk memilih elemen semu seperti state pada elemen, elemen before dan after, elemen ganjil, dan sebagainya.
+
+- Pseudo-class
+  contoh: :hover, :link, :visited, :active, :focus, :checked.
+- Pseudo-element
+  contoh: ::first-line, ::before, ::after, ::marker, ::placeholder.
+
+## Cara Implementasi
+
+Pada tugas kali ini, saya menggunakan tailwind sebagai stylesheet nya. jadi tidak perlu membuat file css lagi tapi sudah di sediakan oleh tailwind dengan cara menuliskan class sesuai dengan dokumentasi. Pada tailwind juga sudah mengusung mobile-first responsive. dengan demikian untuk menerapkan responsive sangat mudah dengan tailwind.
