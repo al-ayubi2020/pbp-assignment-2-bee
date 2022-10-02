@@ -1,37 +1,67 @@
 {% extends 'base.html' %}
-
+<!-- prettier-ignore -->
 {% block meta %}
 <title>To Do List</title>
 {% endblock meta %}
-
+<!-- prettier-ignore -->
 {% block content %}
-<b>username: {{username}}</b>
-
-<table border="1">
-  <tr>
-    <th>Tanggal</th>
-    <th>Judul</th>
-    <th>Deskripsi</th>
-    <th>Status</th>
-    <th>Aksi</th>
-  </tr>
-  {% for todo in data %}
-  <tr>
-    <th>{{todo.date}}</th>
-    <th>{{todo.title}}</th>
-    <th>{{todo.description}}</th>
-    <th>
-        {% if todo.is_finished == False %}
+<div
+  class="h-12 w-full shadow-xl drop-shadow-xl flex md:justify-between justify-end items-center px-10 sticky top-0 bg-white z-50"
+>
+  <div class="space-x-10 hidden md:flex">
+    <p>To Do List</p>
+  </div>
+  <div class="flex gap-2">
+    <button
+      class="py-1 md:px-8 px-2 rounded-lg cursor-pointer bg-[#FF9933] text-white"
+    >
+      <a href="{% url 'todolist:create' %}">Tambah Task Baru</a>
+    </button>
+    <button
+      class="py-1 md:px-8 px-2 rounded-lg cursor-pointer bg-red-700 text-white"
+    >
+      <a href="{% url 'todolist:logout' %}">Logout</a>
+    </button>
+  </div>
+</div>
+<div class="bg-[#BEBEBE] min-h-screen p-10 w-full flex justify-center">
+  <div class="lg:columns-3 md:columns-2 columns-1 gap-10 flex-none space-y-5">
+    {% for todo in data %}
+    <div
+      class="w-[300px] bg-white h-fit rounded-xl shadow-xl drop-shadow-xl break-inside-avoid px-5 py-5"
+    >
+      <div class="pb-5">
+        <p class="text-center text-xl font-semibold">{{todo.title}}</p>
+        <p class="text-center text-xs">{{todo.date}}</p>
+      </div>
+      <p>{{todo.description}}</p>
+      <div class="flex mt-2 space-x-1">
+        <p>Status :</p>
+        <p>
+          <!-- prettier-ignore -->
+          {% if todo.is_finished == False %}
           Belum Selesai
-        {% else %}
+          <!-- prettier-ignore -->
+          {% else %}
           Selesai
-        {% endif %}
-    </th>
-    <th><button><a href="delete/{{todo.pk}}">Hapus</a></button><button><a href="done/{{todo.pk}}">Selesai</a></button></th>
-  </tr>
-  {% endfor %}
-</table>
-<button><a href="{% url 'todolist:create' %}">Tambah Task Baru</a></button>
-<button><a href="{% url 'todolist:logout' %}">Logout</a></button>
-
+          <!-- prettier-ignore -->
+          {% endif %}
+        </p>
+      </div>
+      <div class="w-full flex justify-end space-x-3 mt-5">
+        <button
+          class="py-1 px-8 rounded-lg cursor-pointer bg-red-600 text-white"
+        >
+          <a href="delete/{{todo.pk}}">Hapus</a>
+        </button>
+        <button
+          class="py-1 px-8 rounded-lg cursor-pointer bg-green-600 text-white"
+        >
+          <a href="done/{{todo.pk}}">Selesai</a>
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock content %}

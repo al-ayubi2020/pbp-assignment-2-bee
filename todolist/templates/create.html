@@ -1,42 +1,48 @@
 {% extends 'base.html' %}
-
+<!-- prettier-ignore -->
 {% block meta %}
 <title>Create To Do List</title>
 {% endblock meta %}
-
+<!-- prettier-ignore -->
 {% block content %}
 
-<div class = "create">
+<div class="bg-[#BEBEBE] w-full min-h-screen px-10 py-10">
+  <form method="POST" action="">
+    {% csrf_token %}
+    <div class="w-full">
+      <p class="">Title</p>
+      <input
+        type="text"
+        name="title"
+        class="form-control rounded-md border border-gray-400 w-full"
+        placeholder="Enter Your Title here"
+      />
+    </div>
+    <div class="w-full">
+      <p class="">Description</p>
+      <textarea
+        name="description"
+        id="description"
+        class="w-full min-h-screen rounded-xl"
+        required
+      ></textarea>
+    </div>
+    <div class="w-full flex justify-end">
+      <input
+        class="py-1 md:px-8 px-2 rounded-lg cursor-pointer bg-[#FF9933] text-white"
+        type="submit"
+        value="submit"
+      />
+    </div>
+  </form>
 
-    <h1>Create</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Title: </td>
-                <td><input type="text" name="title" placeholder="title" class="form-control" required></td>
-            </tr>
-                    
-            <tr>
-                <td>Description: </td>
-                <td><textarea name="description" id="description" cols="30" rows="10" required></textarea></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn" type="submit" value="submit"></td>
-            </tr>
-        </table>
-    </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
+  {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 </div>
 
 {% endblock content %}
