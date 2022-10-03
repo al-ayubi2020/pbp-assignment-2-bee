@@ -18,12 +18,11 @@ from todolist.models import Task
 
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
-    username = request.COOKIES['username']
-    user = User.objects.get(username=username)
+    user = request.user
     toDoListData = Task.objects.filter(user=user)
     context = {
         'data' : toDoListData,
-        'username' : username,
+        'username' : user.username,
         'user': user.pk
     }
     return render(request, "todolist.html", context)
@@ -60,7 +59,6 @@ def login_user(request):
         if user is not None:
             login(request, user) 
             response = HttpResponseRedirect(reverse("todolist:show_todolist")) 
-            response.set_cookie('username', user.get_username()) 
             return response
         else:
             messages.info(request, 'Username atau Password salah!')
@@ -70,14 +68,12 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('todolist:login'))
-    response.delete_cookie('username')
     return response
 
 @login_required(login_url='/todolist/login/')
 def create(request):
     if request.method == 'POST':
-        username = request.COOKIES['username']
-        user = User.objects.get(username=username)
+        user = request.user
         title = request.POST.get('title')
         description = request.POST.get('description')
         item = Task(user=user, title=title, description=description)
@@ -89,8 +85,7 @@ def create(request):
 
 @login_required(login_url='/todolist/login/')
 def doneTask(request, id):
-    username = request.COOKIES['username']
-    user = User.objects.get(username=username)
+    user = request.user
     TaskData = Task.objects.filter(user=user).get(pk=id)
     TaskData.is_finished = True
     TaskData.save()
@@ -98,8 +93,7 @@ def doneTask(request, id):
 
 @login_required(login_url='/todolist/login/')
 def deleteTask(request, id):
-    username = request.COOKIES['username']
-    user = User.objects.get(username=username)
+    user = request.user
     TaskData = Task.objects.filter(user=user).get(pk=id)
     TaskData.delete()
     return HttpResponseRedirect(reverse("todolist:show_todolist")) 
