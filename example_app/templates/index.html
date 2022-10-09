@@ -1,12 +1,21 @@
-{% extends 'base.html' %}
 
 {% load static %}
-<!-- prettier-ignore -->
-{% block meta %}
-<title>Hello, world!</title>
-{% endblock meta %}
-<!-- prettier-ignore -->
-{% block content %}
-<h1 class="text-5xl text-orange-400">Hello, world!</h1>
-<h3>This is example app for Django template</h3>
-{% endblock content %}
+{% load tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% tailwind_css %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <title>Hello, world!</title>
+</head>
+
+<body>
+    <h1 class="text-5xl text-purple-400">Hello, world!</h1>
+    <h3>This is example app for Django template</h3>
+</body>
+
+</html>
