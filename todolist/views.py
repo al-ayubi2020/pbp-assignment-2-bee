@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http.response import JsonResponse
 import datetime
 
 # from todolist.forms import CreateForm
@@ -20,12 +21,14 @@ from todolist.models import Task
 def show_todolist(request):
     user = request.user
     toDoListData = Task.objects.filter(user=user)
-    context = {
-        'data' : toDoListData,
-        'username' : user.username,
-        'user': user.pk
-    }
+    context = {}
     return render(request, "todolist.html", context)
+
+@login_required(login_url='/todolist/login/')
+def todolist_json(request):
+    user = request.user
+    toDoListData = Task.objects.filter(user=user)
+    return HttpResponse(serializers.serialize("json", toDoListData), content_type="application/json")
 
 def register(request):
     if request.method == "POST":
@@ -79,7 +82,7 @@ def create(request):
         description = request.POST.get('description')
         item = Task(user=user, title=title, description=description)
         item.save()
-        return HttpResponseRedirect(reverse("todolist:show_todolist")) 
+        return JsonResponse({"instance": "Proyek Dibuat"}, status=200) 
         
     context = {}
     return render(request, "create.html", context)
@@ -88,13 +91,13 @@ def create(request):
 def doneTask(request, id):
     user = request.user
     TaskData = Task.objects.filter(user=user).get(pk=id)
-    TaskData.is_finished = True
+    TaskData.is_finished = not TaskData.is_finished
     TaskData.save()
-    return HttpResponseRedirect(reverse("todolist:show_todolist")) 
+    return JsonResponse({"instance": "Task Diupdate"}, status=200) 
 
 @login_required(login_url='/todolist/login/')
 def deleteTask(request, id):
     user = request.user
     TaskData = Task.objects.filter(user=user).get(pk=id)
     TaskData.delete()
-    return HttpResponseRedirect(reverse("todolist:show_todolist")) 
+    return JsonResponse({"instance": "Task Dihapus"}, status=200) 

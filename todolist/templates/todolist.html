@@ -2,12 +2,99 @@
 <!-- prettier-ignore -->
 {% block meta %}
 <title>To Do List</title>
+<script>
+  let tab;
+  function show(data) {
+    tab = ``;
+
+    for (let r of data) {
+      tab += `
+      <div class="card w-96 bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title text-center"><p>${r.fields.title}</p></h2>
+          <p class="card-title text-sm font-normal">${r.fields.date}</p>
+          <p>${r.fields.description}</p>
+          <p>selesai : ${r.fields.is_finished}
+          </p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-error" onClick={deleteData(${r.pk})}>Hapus</button>
+            <button class="btn btn-success" onClick={doneData(${r.pk})}>Selesai</button>
+          </div>
+        </div>
+      </div>
+    `;
+    }
+
+    document.getElementById("table").innerHTML = tab;
+  }
+
+  function loadData() {
+    $.get("{% url 'todolist:todolist_json' %}", function (data) {
+      show(data);
+      console.log(data);
+    });
+  }
+
+  $(document).ready(function () {
+    loadData();
+  });
+
+  $(document).on("submit", "#buatproject", function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "{% url 'todolist:create' %}",
+      data: {
+        title: $("#title").val(),
+        description: $("#description").val(),
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+      },
+      dataType: "json",
+      success: function () {
+        loadData();
+        document.getElementById('title').value = "";
+        document.getElementById('description').value = "";
+      },
+    });
+  });
+
+  function deleteData(id) {
+    $.ajax({
+      type: "POST",
+      url: `delete/${id}`,
+      data: {csrfmiddlewaretoken: "{{ csrf_token }}"},
+      dataType: "json",
+      success: function () {
+        loadData();
+      },
+    });
+  }
+
+  function doneData(id) {
+    $.ajax({
+      type: "POST",
+      url: `done/${id}`,
+      data: {csrfmiddlewaretoken: "{{ csrf_token }}"},
+      dataType: "json",
+      success: function () {
+        loadData();
+      },
+    });
+  }
+</script>
 {% endblock meta %}
 <!-- prettier-ignore -->
 {% block content %}
+<div class="alert shadow-lg">
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info flex-shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    <span>12 unread messages. Tap to see.</span>
+  </div>
+</div>
+
 <div class="navbar bg-base-100">
   <div class="flex-1">
-    <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+    <a class="btn btn-ghost normal-case text-xl" href="/todolist/">daisyUI</a>
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal p-0 md:hidden">
@@ -26,52 +113,31 @@
   </div>
 </div>
 <div class="bg-[#BEBEBE] min-h-screen p-10 w-full flex justify-center">
-  <div class="lg:columns-3 md:columns-2 columns-1 gap-10 flex-none space-y-5">
-    {% for todo in data %}
-    <div class="card w-96 bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h2 class="card-title text-center"><p>{{todo.title}}</p></h2>
-        <p class="card-title text-sm font-normal">{{todo.date}}</p>
-        <p>{{todo.description}}</p>
-        <p>Status :
-          <!-- prettier-ignore -->
-          {% if todo.is_finished == False %}
-          Belum Selesai
-          <!-- prettier-ignore -->
-          {% else %}
-          Selesai
-          <!-- prettier-ignore -->
-          {% endif %}
-        </p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-error"><a href="delete/{{todo.pk}}">Hapus</a></button>
-          <button class="btn btn-success"><a href="done/{{todo.pk}}">Selesai</a></button>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
+  <div class="lg:columns-3 md:columns-2 columns-1 gap-10 flex-none space-y-5" id="table"></div>
 </div>
 
 <input type="checkbox" id="my-modal-4" class="modal-toggle" />
 <label for="my-modal-4" class="modal cursor-pointer">
   <label class="modal-box relative" for="">
     <h3 class="text-lg font-bold">Tambah Task</h3>
+    <form action="" id="buatproject">
+      {% csrf_token %}
     <div class="form-control w-full mt-5">
       <label class="label">
         <span class="label-text">Title</span>
       </label>
-      <input type="text" placeholder="Type here" class="input input-bordered w-full" />
+      <input type="text" placeholder="Type here" class="input input-bordered w-full" id="title" required/>
     </div>
     <div class="form-control w-full mb-5">
       <label class="label">
         <span class="label-text">Description</span>
       </label> 
-      <textarea class="textarea textarea-bordered h-24" placeholder="Bio"></textarea>
+      <textarea class="textarea textarea-bordered h-24" placeholder="Bio" id="description" required></textarea>
     </div>
     <div class="w-full flex justify-end">
-      <button class="btn btn-active btn-primary">Submit</button>
+      <button class="btn btn-active btn-primary modal-action" type="submit" id="button"><label for="my-modal-4">Submit</label></button>
     </div>
+  </form>
   </label>
 </label>
 {% endblock content %}
