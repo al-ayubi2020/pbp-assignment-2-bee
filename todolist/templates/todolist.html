@@ -5,39 +5,35 @@
 {% endblock meta %}
 <!-- prettier-ignore -->
 {% block content %}
-<div
-  class="h-12 w-full shadow-xl drop-shadow-xl flex md:justify-between justify-end items-center px-10 sticky top-0 bg-white z-50"
->
-  <div class="space-x-10 hidden md:flex">
-    <p>To Do List</p>
+<div class="navbar bg-base-100">
+  <div class="flex-1">
+    <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
   </div>
-  <div class="flex gap-2">
-    <button
-      class="py-1 md:px-8 px-2 rounded-lg cursor-pointer bg-[#FF9933] text-white"
-    >
-      <a href="{% url 'todolist:create' %}">Tambah Task Baru</a>
-    </button>
-    <button
-      class="py-1 md:px-8 px-2 rounded-lg cursor-pointer bg-red-700 text-white"
-    >
-      <a href="{% url 'todolist:logout' %}">Logout</a>
-    </button>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal p-0 md:hidden">
+      <div class="dropdown dropdown-end">
+        <label tabindex="0" class="btn btn-square btn-ghost"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg></label>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-300 rounded-box w-52">
+          <li><label for="my-modal-4" class="btn btn-ghost w-full">Tambah</label></li>
+          <li><a href="{% url 'todolist:logout' %}" class="w-full flex justify-center"><p class="text-center">Logout</p></a></li>
+        </ul>
+      </div>
+    </ul>
+    <ul class="menu menu-horizontal p-0 hidden md:flex">
+      <li><label for="my-modal-4" class="btn btn-ghost">Tambah</label></li>
+      <li><a href="{% url 'todolist:logout' %}">Logout</a></li>
+    </ul>
   </div>
 </div>
 <div class="bg-[#BEBEBE] min-h-screen p-10 w-full flex justify-center">
   <div class="lg:columns-3 md:columns-2 columns-1 gap-10 flex-none space-y-5">
     {% for todo in data %}
-    <div
-      class="w-[300px] bg-white h-fit rounded-xl shadow-xl drop-shadow-xl break-inside-avoid px-5 py-5"
-    >
-      <div class="pb-5">
-        <p class="text-center text-xl font-semibold">{{todo.title}}</p>
-        <p class="text-center text-xs">{{todo.date}}</p>
-      </div>
-      <p>{{todo.description}}</p>
-      <div class="flex mt-2 space-x-1">
-        <p>Status :</p>
-        <p>
+    <div class="card w-96 bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-center"><p>{{todo.title}}</p></h2>
+        <p class="card-title text-sm font-normal">{{todo.date}}</p>
+        <p>{{todo.description}}</p>
+        <p>Status :
           <!-- prettier-ignore -->
           {% if todo.is_finished == False %}
           Belum Selesai
@@ -47,21 +43,35 @@
           <!-- prettier-ignore -->
           {% endif %}
         </p>
-      </div>
-      <div class="w-full flex justify-end space-x-3 mt-5">
-        <button
-          class="py-1 px-8 rounded-lg cursor-pointer bg-red-600 text-white"
-        >
-          <a href="delete/{{todo.pk}}">Hapus</a>
-        </button>
-        <button
-          class="py-1 px-8 rounded-lg cursor-pointer bg-green-600 text-white"
-        >
-          <a href="done/{{todo.pk}}">Selesai</a>
-        </button>
+        <div class="card-actions justify-end">
+          <button class="btn btn-error"><a href="delete/{{todo.pk}}">Hapus</a></button>
+          <button class="btn btn-success"><a href="done/{{todo.pk}}">Selesai</a></button>
+        </div>
       </div>
     </div>
     {% endfor %}
   </div>
 </div>
+
+<input type="checkbox" id="my-modal-4" class="modal-toggle" />
+<label for="my-modal-4" class="modal cursor-pointer">
+  <label class="modal-box relative" for="">
+    <h3 class="text-lg font-bold">Tambah Task</h3>
+    <div class="form-control w-full mt-5">
+      <label class="label">
+        <span class="label-text">Title</span>
+      </label>
+      <input type="text" placeholder="Type here" class="input input-bordered w-full" />
+    </div>
+    <div class="form-control w-full mb-5">
+      <label class="label">
+        <span class="label-text">Description</span>
+      </label> 
+      <textarea class="textarea textarea-bordered h-24" placeholder="Bio"></textarea>
+    </div>
+    <div class="w-full flex justify-end">
+      <button class="btn btn-active btn-primary">Submit</button>
+    </div>
+  </label>
+</label>
 {% endblock content %}
