@@ -18,7 +18,7 @@
           </p>
           <div class="card-actions justify-end">
             <button class="btn btn-error" onClick={deleteData(${r.pk})}>Hapus</button>
-            <button class="btn btn-success" onClick={doneData(${r.pk})}>Selesai</button>
+            <button class="btn btn-primary" onClick={doneData(${r.pk})}>Selesai</button>
           </div>
         </div>
       </div>
@@ -54,6 +54,17 @@
         loadData();
         document.getElementById('title').value = "";
         document.getElementById('description').value = "";
+        $.toast({ 
+  text : "Task Berhasil Dibuat", 
+  showHideTransition : 'fade',  // It can be plain, fade or slide
+  bgColor : '#23B65D',              // Background color for toast
+  textColor : '#eee',            // text color
+  allowToastClose : false,       // Show the close button or not
+  hideAfter : 2000,              // `false` to make it sticky or time in miliseconds to hide after
+  stack : 5,                     // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+  textAlign : 'left',            // Alignment of text i.e. left, right, center
+  position : 'bottom-right'       // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+})
       },
     });
   });
@@ -66,6 +77,17 @@
       dataType: "json",
       success: function () {
         loadData();
+        $.toast({ 
+  text : "Task Dihapus", 
+  showHideTransition : 'fade',  // It can be plain, fade or slide
+  bgColor : '#E01A31',              // Background color for toast
+  textColor : '#eee',            // text color
+  allowToastClose : false,       // Show the close button or not
+  hideAfter : 2000,              // `false` to make it sticky or time in miliseconds to hide after
+  stack : 5,                     // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+  textAlign : 'left',            // Alignment of text i.e. left, right, center
+  position : 'bottom-right'       // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+})
       },
     });
   }
@@ -78,6 +100,17 @@
       dataType: "json",
       success: function () {
         loadData();
+        $.toast({ 
+  text : "Berhasil Update", 
+  showHideTransition : 'fade',  // It can be plain, fade or slide
+  bgColor : '#0000ff',              // Background color for toast
+  textColor : '#eee',            // text color
+  allowToastClose : false,       // Show the close button or not
+  hideAfter : 2000,              // `false` to make it sticky or time in miliseconds to hide after
+  stack : 5,                     // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+  textAlign : 'left',            // Alignment of text i.e. left, right, center
+  position : 'bottom-right'       // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+})
       },
     });
   }
@@ -85,16 +118,9 @@
 {% endblock meta %}
 <!-- prettier-ignore -->
 {% block content %}
-<div class="alert shadow-lg">
-  <div>
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info flex-shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-    <span>12 unread messages. Tap to see.</span>
-  </div>
-</div>
-
 <div class="navbar bg-base-100">
   <div class="flex-1">
-    <a class="btn btn-ghost normal-case text-xl" href="/todolist/">daisyUI</a>
+    <a class="btn btn-ghost normal-case text-xl" href="/todolist/">To Do List</a>
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal p-0 md:hidden">
@@ -112,6 +138,7 @@
     </ul>
   </div>
 </div>
+
 <div class="bg-[#BEBEBE] min-h-screen p-10 w-full flex justify-center">
   <div class="lg:columns-3 md:columns-2 columns-1 gap-10 flex-none space-y-5" id="table"></div>
 </div>
