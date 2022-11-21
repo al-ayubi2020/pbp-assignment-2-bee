@@ -2,6 +2,7 @@ from django.shortcuts import render
 from mywatchlist.models import MyWatchListItem
 from django.http import HttpResponse
 from django.core import serializers
+from .models import MyWatchListItem
 
 def show_home(request):
     watched = MyWatchListItem.objects.filter(watched=True).count()
@@ -42,3 +43,9 @@ def show_mywatchlist_xml_by_id(request, id):
 def show_mywatchlist_json_by_id(request, id):
     data_mywatchlist_by_id = MyWatchListItem.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data_mywatchlist_by_id), content_type="application/json")
+
+def update(request, id):
+    mywatchlist = MyWatchListItem.objects.get(pk=id)
+    mywatchlist.watched = not mywatchlist.watched
+    mywatchlist.save()
+    return JsonResponse({"instance": "Status diupdate"}, status=200) 
