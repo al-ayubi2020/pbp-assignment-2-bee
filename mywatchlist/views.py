@@ -3,6 +3,7 @@ from mywatchlist.models import MyWatchListItem
 from django.http import HttpResponse
 from django.core import serializers
 from .models import MyWatchListItem
+from django.http.response import JsonResponse
 
 def show_home(request):
     watched = MyWatchListItem.objects.filter(watched=True).count()
